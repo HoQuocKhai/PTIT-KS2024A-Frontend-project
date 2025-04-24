@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+}
+
+body {
+    font-size: 20px;
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    background-color: rgb(40, 49, 71);
+    background: linear-gradient(135deg, #0a0f2c, #1e2a4c);
+    position: relative;
+    overflow: hidden;
+}
+
+.container-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    z-index: 1;
+}
+  
+
+.Gradient,.Gradient2 {
+    position: absolute;
+    z-index: 0;
+    opacity: 0.6;
+}
+
+.Gradient img {
+    width: 300px;
+    height: auto;
+    /* filter: blur(20px); */
+    position: absolute;
+    bottom: 200px;
+    right: 200px;
+}
+
+.Gradient2 img {
+    width: 500px;
+    height: auto;
+    /* filter: blur(20px); */
+    position: absolute;
+    top: 50px;
+    left: 700px;
+}
+
+body::before,body::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.6;
+    z-index: 0;
+}
+
+body::before {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, #1900ff, #000071);
+    top: -100px;
+    left: -100px;
+}
+
+body::after {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, #0008ff, #003bd1);
+    bottom: -150px;
+    right: -150px;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFFFF;
+    padding: 50px;
+    border-radius: 1%;
+}
+
+
+.title>h1 {
+    font-size: 60px;
+    color: #E8EFFD;
+}
+
+.title>p {
+    margin: 170px 0px 0px 0px;
+    text-align: center;
+    color: #BAD0F8;
+}
+
+.title, form {
+    position: relative;
+    z-index: 1;
+}
+  
+
+.headInput {
+    display: flex;
+}
+
+.nameInput {
+    display: flex;
+    flex-direction: column;
+}
+
+.lastInput {
+    font-weight: bold;
+    display: flex;
+}
+
+.lastInput>a {
+    color: red;
+    margin-left: 10px;
+}
+
+
+input {
+    margin: 10px 5px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid rgb(193, 193, 193);
+}
+
+label {
+    margin: 0px 0px 20px 10px;
+}
+
+button {
+    margin: 0px 0px 20px 10px;
+    width: 80px;
+    height: 40px;
+}
