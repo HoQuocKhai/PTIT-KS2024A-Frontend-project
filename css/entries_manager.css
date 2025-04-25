@@ -1,0 +1,156 @@
+/* Base Reset */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9fafb;
+    color: #333;
+  }
+  
+  /* Common */
+  button, select {
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    font-family: inherit;
+  }
+  
+  button:hover {
+    opacity: 0.9;
+  }
+  
+  input::placeholder {
+    color: #6b7280;
+  }
+  
+  .fa-search {
+    font-size: 16px;
+    color: #9ca3af;
+  }
+  
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    background-color: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+
+  .header>img {
+    width: 40px;
+    border-radius: 100%;
+  }
+  /* Table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+  }
+  
+  th, td {
+    padding: 15px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f3f4f6;
+    color: #374151;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  td {
+    border-bottom: 1px solid #f3f4f6;
+  }
+  
+  td button {
+    margin-right: 6px;
+    padding: 6px 12px;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  
+  
+  /* Sidebar Menu */
+  .menu-btn {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: #dbeafe;
+    color: #2563eb;
+  }
+  
+  .menu-btn:hover {
+    background-color: #bfdbfe;
+  }
+  
+  .menu-btn .icon-bg {
+    width: 22px;
+    height: 22px;
+    background: #f97316;
+    color: #fff;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+  
+  .logout {
+    color: #ef4444;
+  }
+  
+  .logout:hover {
+    background-color: #fecaca;
+  }
+  
+  /* Table Avatar and Name */
+  .table_name {
+    display: flex;
+    align-items: center;
+  }
+  
+  .table-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+  
+  .user-info .name {
+    font-size: 16px;
+    color: #111827;
+  }
+  
+  .user-info .username {
+    font-size: 14px;
+    color: #6b7280;
+  }
+
+.content{
+    background-color: white;
+    padding: 20px;
+}
+
+.content>h2{
+    text-align: center;
+}
+
+.content>.Search-category-name{
+    display: flex;
+    flex-direction: column;
+}
+
+.content>.Search-category-name>input,button{
+    margin: 5px;
+}

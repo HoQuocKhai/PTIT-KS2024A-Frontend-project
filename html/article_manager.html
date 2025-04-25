@@ -25,144 +25,159 @@
         <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Avatar" class="avatar">
     </header>
 
-    <section>
-        <button   data-bs-toggle="modal" data-bs-target="#addArticleModal">Thêm
-            bài viết mới
-        </button>
-
-        <div class="modal fade" id="addArticleModal" tabindex="-1" aria-labelledby="addArticleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="addArticleModalLabel">📝 Thêm bài viết mới</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
-                    </div>
-
-                    <form>
-                        <div class="modal-body">
-
-                            <div class="mb-3">
-                                <label for="title" class="form-label">Tiêu đề</label>
-                                <input type="text" class="form-control" id="title" name="title"
-                                    placeholder="Nhập tiêu đề bài viết" />
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="category" class="form-label">Chuyên mục</label>
-                                <input type="text" class="form-control" id="category" name="category"
-                                    placeholder="Ví dụ: Công nghệ, Đời sống" />
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="mood" class="form-label">Tâm trạng</label>
-                                <input type="text" class="form-control" id="mood" name="mood" value="😊 Vui vẻ"
-                                    readonly />
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="content" class="form-label">Nội dung</label>
-                                <textarea class="form-control" id="content" name="content" rows="4"
-                                    placeholder="Viết nội dung bài viết tại đây..."></textarea>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Trạng thái</label>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="status" id="statusPublic"
-                                        value="public">
-                                    <label class="form-check-label" for="statusPublic">Công khai</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="status" id="statusPrivate"
-                                        value="private">
-                                    <label class="form-check-label" for="statusPrivate">Riêng tư</label>
-                                </div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="image" class="form-label">Hình ảnh</label>
-                                <input class="form-control" type="file" id="image" name="image" />
-                                <small class="form-text text-muted">Chọn hình ảnh từ máy tính của bạn.</small>
-                            </div>
-
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                            <button type="submit" class="btn btn-primary">Thêm bài viết</button>
-                        </div>
-                    </form>
-
-                </div>
+    <div class="container">
+        <div>
+            <!-- Sidebar -->
+            <div class="custom-sidebar p-3" style="width: 200px;">
+                <button class="menu-btn"><i class="fa fa-users icon-bg me-2"></i> Manage Users</button>
+                <button class="menu-btn"><i class="fa fa-list icon-bg me-2"></i> Manage Entries</button>
+                <button class="menu-btn"><i class="fa fa-newspaper icon-bg me-2"></i> Manage Article</button>
+                <button class="menu-btn logout"><i class="fa fa-sign-out-alt icon-bg me-2"></i> Log out</button>
             </div>
         </div>
+        <div>
+            <section>
 
-        <h1>Quản lý bài viết</h1>
-        <table class="post-table">
-            <tr>
-                <th>Ảnh</th>
-                <th>Tiêu đề</th>
-                <th>Chủ đề</th>
-                <th>Nội dung</th>
-                <th>Trạng thái</th>
-                <th>Chỉnh sửa trạng thái</th>
-                <th>Hành động</th>
-            </tr>
-            <tr>
-                <td><img src="../assets/images/Bài viết 1.png" alt=""></td>
-                <td>Học nấu cá sốt cà chua</td>
-                <td>Nấu ăn</td>
-                <td>tôi đã học được cách nấu ăn...</td>
-                <td>Public</td>
-                <td>
-                    <select name="Status" id="">
-                        <option value="Public">Public</option>
-                        <option value="Private">Private</option>
-                    </select>
-                </td>
-                <td>
-                    <button>Sửa</button>
-                    <button>Xoá</button>
-                </td>
-            </tr>
-            <tr>
-                <td><img src="../assets/images/Bài viết 2.png" alt=""></td>
-                <td>Bí kíp viết CV ngành IT</td>
-                <td>IT</td>
-                <td>Chia sẻ cách viết CV ấn tượng...</td>
-                <td class="Status_">Private</td>
-                <td>
-                    <select name="Status" id="">
-                        <option value="Public">Public</option>
-                        <option value="Private">Private</option>
-                    </select>
-                </td>
-                <td>
-                    <button>Sửa</button>
-                    <button>Xoá</button>
-                </td>
-            </tr>
-        </table>
-        <div class="pagination">
-            <a href="#" class="arrow">← Previous</a>
-            <ul class="page-numbers">
-                <li><a href="#" class="page active">1</a></li>
-                <li><a href="#" class="page">2</a></li>
-                <li><a href="#" class="page">3</a></li>
-                <li><span class="dots">•</span></li>
-                <li><a href="#" class="page">8</a></li>
-                <li><a href="#" class="page">9</a></li>
-                <li><a href="#" class="page">10</a></li>
-            </ul>
-            <a href="#" class="arrow">Next →</a>
+                <button data-bs-toggle="modal" data-bs-target="#addArticleModal">Thêm
+                    bài viết mới
+                </button>
+
+                <div class="modal fade" id="addArticleModal" tabindex="-1" aria-labelledby="addArticleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="addArticleModalLabel">📝 Thêm bài viết mới</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Đóng"></button>
+                            </div>
+
+                            <form>
+                                <div class="modal-body">
+
+                                    <div class="mb-3">
+                                        <label for="title" class="form-label">Tiêu đề</label>
+                                        <input type="text" class="form-control" id="title" name="title"
+                                            placeholder="Nhập tiêu đề bài viết" />
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="category" class="form-label">Chuyên mục</label>
+                                        <input type="text" class="form-control" id="category" name="category"
+                                            placeholder="Ví dụ: Công nghệ, Đời sống" />
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="mood" class="form-label">Tâm trạng</label>
+                                        <input type="text" class="form-control" id="mood" name="mood" value="😊 Vui vẻ"
+                                            readonly />
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="content" class="form-label">Nội dung</label>
+                                        <textarea class="form-control" id="content" name="content" rows="4"
+                                            placeholder="Viết nội dung bài viết tại đây..."></textarea>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Trạng thái</label>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="status" id="statusPublic"
+                                                value="public">
+                                            <label class="form-check-label" for="statusPublic">Công khai</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="status"
+                                                id="statusPrivate" value="private">
+                                            <label class="form-check-label" for="statusPrivate">Riêng tư</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="image" class="form-label">Hình ảnh</label>
+                                        <input class="form-control" type="file" id="image" name="image" />
+                                        <small class="form-text text-muted">Chọn hình ảnh từ máy tính của bạn.</small>
+                                    </div>
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                    <button type="submit" class="btn btn-primary">Thêm bài viết</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+                <h1>Quản lý bài viết</h1>
+                <table class="post-table">
+                    <tr>
+                        <th>Ảnh</th>
+                        <th>Tiêu đề</th>
+                        <th>Chủ đề</th>
+                        <th>Nội dung</th>
+                        <th>Trạng thái</th>
+                        <th>Chỉnh sửa trạng thái</th>
+                        <th>Hành động</th>
+                    </tr>
+                    <tr>
+                        <td><img src="../assets/images/Bài viết 1.png" alt=""></td>
+                        <td>Học nấu cá sốt cà chua</td>
+                        <td>Nấu ăn</td>
+                        <td>tôi đã học được cách nấu ăn...</td>
+                        <td>Public</td>
+                        <td>
+                            <select name="Status" id="">
+                                <option value="Public">Public</option>
+                                <option value="Private">Private</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button>Sửa</button>
+                            <button>Xoá</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><img src="../assets/images/Bài viết 2.png" alt=""></td>
+                        <td>Bí kíp viết CV ngành IT</td>
+                        <td>IT</td>
+                        <td>Chia sẻ cách viết CV ấn tượng...</td>
+                        <td class="Status_">Private</td>
+                        <td>
+                            <select name="Status" id="">
+                                <option value="Public">Public</option>
+                                <option value="Private">Private</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button>Sửa</button>
+                            <button>Xoá</button>
+                        </td>
+                    </tr>
+                </table>
+                <div class="pagination">
+                    <a href="#" class="arrow">← Previous</a>
+                    <ul class="page-numbers">
+                        <li><a href="#" class="page active">1</a></li>
+                        <li><a href="#" class="page">2</a></li>
+                        <li><a href="#" class="page">3</a></li>
+                        <li><span class="dots">•</span></li>
+                        <li><a href="#" class="page">8</a></li>
+                        <li><a href="#" class="page">9</a></li>
+                        <li><a href="#" class="page">10</a></li>
+                    </ul>
+                    <a href="#" class="arrow">Next →</a>
+                </div>
+            </section>
         </div>
-    </section>
+    </div>
 
 
 
-
+    <!-- xem chi tiết bài viet -->
     <div class="article-detail">
         <button onclick="goBack()">←</button>
 
