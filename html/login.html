@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <p class="or">Or</p>
-                <form id="loginForm">
+                <form id="loginForm" onsubmit="handleLogin(event)">
                     <input type="email" id="loginEmail" placeholder="Enter a valid email address" />
                     <label>Email address</label>
 
@@ -36,6 +36,7 @@
 
                     <button type="submit">Login</button>
                 </form>
+
                 <p class="register-text">
                     Don't have an account? <a href="register.html">Register</a>
                 </p>

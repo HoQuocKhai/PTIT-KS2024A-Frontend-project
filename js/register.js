@@ -1,3 +1,17 @@
+if (!localStorage.getItem("users")) {
+    const adminUser = {
+        firstname: "Admin",
+        lastname: "User",
+        name: "Admin User",
+        username: "@admin",
+        email: "admin@gmail.com",
+        password: "admin123",
+        status: "Hoạt động",
+        role: "admin"
+    };
+    localStorage.setItem("users", JSON.stringify([adminUser]));
+}
+
 document.getElementById("registerForm").addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -47,16 +61,33 @@ document.getElementById("registerForm").addEventListener("submit", function (e) 
         isValid = false;
     }
 
-    // Nếu hợp lệ, lưu vào localStorage & chuyển hướng
     if (isValid) {
-        const user = {
+        // Lấy danh sách users hiện có từ localStorage
+        const users = JSON.parse(localStorage.getItem("users")) || [];
+
+        // Kiểm tra email đã tồn tại chưa
+        const emailExists = users.some(user => user.email === email);
+        if (emailExists) {
+            document.getElementById("error-email").textContent = "Email đã được sử dụng";
+            return;
+        }
+
+        // Tạo user mới
+        const newUser = {
             firstname,
             lastname,
+            name: `${firstname} ${lastname}`,
+            username: "@" + firstname.toLowerCase() + lastname.toLowerCase(),
             email,
             password,
+            status: "Hoạt động",
+            role: "user"
         };
 
-        localStorage.setItem("user", JSON.stringify(user));
+        // Thêm vào danh sách & lưu lại
+        users.push(newUser);
+        localStorage.setItem("users", JSON.stringify(users));
+
         alert("Đăng ký thành công!");
         window.location.href = "login.html";
     }

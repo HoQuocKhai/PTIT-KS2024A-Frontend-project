@@ -1,31 +1,43 @@
-document.getElementById("loginForm").addEventListener("submit", function (e) {
+function handleLogin(e) {
+    
+
     e.preventDefault();
 
     const emailInput = document.getElementById("loginEmail").value.trim();
     const passwordInput = document.getElementById("loginPassword").value;
     const errorDisplay = document.getElementById("loginError");
 
+    const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
     errorDisplay.textContent = "";
 
-    if (emailInput === "") {
+    if (!emailInput) {
         errorDisplay.textContent = "Email không được để trống";
         return;
     }
-
-    if (passwordInput === "") {
+    if (!passwordInput) {
         errorDisplay.textContent = "Mật khẩu không được để trống";
         return;
     }
 
-    // Lấy dữ liệu từ localStorage
-    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (storedUsers.length === 0) {
+        errorDisplay.textContent = "Tài khoản chưa được đăng ký!";
+        return;
+    }
 
-    if (!storedUser || storedUser.email !== emailInput || storedUser.password !== passwordInput) {
+    const user = storedUsers.find(user => user.email === emailInput && user.password === passwordInput);
+
+    if (!user) {
         errorDisplay.textContent = "Email hoặc mật khẩu không đúng";
         return;
     }
 
-    // Đăng nhập thành công
-    alert("Đăng nhập thành công!");
-    window.location.href = "../js/index.html"; // chuyển về trang dashboard
-});
+    alert(`Đăng nhập thành công! Chào ${user.name}`);
+
+    // Nếu user là admin, chuyển đến user_manager.html
+    if (user.role === "admin") {
+        window.location.href = "/html/user_manager.html";
+    } else {
+        window.location.href = "/index.html";
+    }
+}
+
