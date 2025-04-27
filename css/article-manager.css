@@ -41,21 +41,21 @@ body {
 
 /* Main Section */
 section {
-    max-width: 80%;
-    margin: 40px auto;
-    padding: 0 20px;
+    margin: 40px;
+    width: 150%;
 }
 
 section h1 {
     text-align: center;
-    color: #1f2937;
-    margin-bottom: 30px;
+    margin: 30px auto;
 }
+
 
 section button {
     background-color: #6d28d9;
     color: #fff;
     padding: 10px 18px;
+    margin-bottom: 20px;
     border: none;
     border-radius: 8px;
     font-weight: 600;
@@ -77,7 +77,8 @@ table {
 }
 
 th, td {
-    padding: 15px;
+    font-size: 20px;
+    padding: 10px;
     text-align: left;
 }
 
@@ -94,17 +95,6 @@ td {
 td img {
     max-width: 100%;
     border-radius: 8px;
-}
-
-/* Status Badges */
-.Public {
-    color: #10b981;
-    font-weight: bold;
-}
-
-.Private {
-    color: #ef4444;
-    font-weight: bold;
 }
 
 /* Select Dropdown */
@@ -190,74 +180,7 @@ td button:last-child:hover {
     gap: 8px;
 }
 
-.add-article-form {
-    max-width: 700px;
-    margin: 30px auto;
-    padding: 20px;
-    font-family: 'Segoe UI', sans-serif;
-  }
   
-  .add-article-form h2 {
-    font-size: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .add-article-form label {
-    display: block;
-    margin-top: 15px;
-    font-weight: 600;
-  }
-  
-  .add-article-form input[type="text"],
-  .add-article-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    background-color: #f3f4f6;
-  }
-  
-  .add-article-form textarea {
-    resize: vertical;
-  }
-  
-  .status-options {
-    margin-top: 10px;
-  }
-  
-  .status-options label {
-    margin-right: 20px;
-    font-weight: normal;
-  }
-  
-  .upload-box {
-    margin-top: 15px;
-    border: 2px dashed #ccc;
-    padding: 20px;
-    text-align: center;
-    border-radius: 6px;
-    background-color: #fafafa;
-  }
-  
-  .upload-box input[type="file"] {
-    margin-bottom: 10px;
-  }
-  
-  .add-article-form button {
-    margin-top: 20px;
-    background-color: #2fb360;
-    border: none;
-    color: white;
-    padding: 10px 18px;
-    font-weight: 600;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  
-  .add-article-form button:hover {
-    background-color: #16a34a;
-  }
 
 /* XEM CHI TIẾT BÀI VIẾT */
 .article-detail {
@@ -322,16 +245,16 @@ td button:last-child:hover {
   }
   .container{
     display: flex;
-    width: 100%;
+    padding: 0;
+    margin: 0;
   }
   .menu-btn {
     display: flex;
-    align-items: center;
     width: 100%;
-    padding: 10px 12px;
+    padding: 15px 17px;
     margin-bottom: 10px;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 15px;
+    font-weight: 500px;
     background-color: #dbeafe;
     color: #2563eb;
   }
