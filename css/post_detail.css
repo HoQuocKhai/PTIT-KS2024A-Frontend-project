@@ -1,0 +1,124 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fff;
+    color: #111827;
+    padding: 20px;
+  }
+  
+  .article-detail {
+    max-width: 700px;
+    margin: 0 auto;
+    background-color: #f9fafb;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  
+  button {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: #4b5563;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  
+  #postTitle {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .article-content {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+  
+  .article-actions {
+    display: flex;
+    gap: 20px;
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin-bottom: 20px;
+  }
+  
+  a.view-comments {
+    display: inline-block;
+    color: #10b981;
+    text-decoration: none;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  
+  a.view-comments:hover {
+    text-decoration: underline;
+  }
+  
+  hr {
+    border: none;
+    height: 1px;
+    background-color: #e5e7eb;
+    margin: 20px 0;
+  }
+  
+  /* Comments Section */
+  #commentsSection {
+    margin-top: 10px;
+  }
+  
+  .comment {
+    background-color: #f3f4f6;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .comment .comment-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .comment .comment-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+  
+  .comment .comment-username {
+    font-weight: 500;
+    color: #111827;
+  }
+  
+  .comment .comment-text {
+    font-size: 0.95rem;
+    color: #374151;
+  }
+  
+  .comment .comment-actions {
+    display: flex;
+    gap: 20px;
+    font-size: 0.85rem;
+    color: #6b7280;
+    margin-top: 10px;
+  }
+  

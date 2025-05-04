@@ -1,6 +1,4 @@
 function handleLogin(e) {
-    
-
     e.preventDefault();
 
     const emailInput = document.getElementById("loginEmail").value.trim();
@@ -31,13 +29,13 @@ function handleLogin(e) {
         return;
     }
 
+    localStorage.setItem("loggedInUser", user.name);
+
     alert(`Đăng nhập thành công! Chào ${user.name}`);
 
-    // Nếu user là admin, chuyển đến user_manager.html
     if (user.role === "admin") {
         window.location.href = "/html/user_manager.html";
     } else {
         window.location.href = "/index.html";
     }
 }
-

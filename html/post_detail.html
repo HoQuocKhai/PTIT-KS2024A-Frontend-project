@@ -1,0 +1,28 @@
+<!-- detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chi tiết bài viết</title>
+  <link rel="stylesheet" href="../css/post_detail.css">
+</head>
+<body>
+  <div class="article-detail">
+    <button onclick="window.history.back()">← Quay lại</button>
+    <img id="postImage" class="avatar" />
+    <h2 id="postTitle"></h2>
+    <p id="postContent" class="article-content"></p>
+
+    <div class="article-actions">
+      <span id="postLikes"></span>
+      <span id="postReplies"></span>
+    </div>
+
+    <hr />
+    <a href="#" class="view-comments">View all comments ⬇</a>
+    <div id="commentsSection"></div>
+  </div>
+
+  <script src="../js/post_detail.js"></script>
+</body>
+</html>

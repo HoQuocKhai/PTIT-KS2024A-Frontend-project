@@ -6,6 +6,16 @@ if (document.readyState === 'loading') {
     initApp();
 }
 
+// Hàm chuyển file ảnh thành base64
+async function getBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
+}
+
 function initApp() {
     const addArticleForm = document.querySelector("#addArticleModal form");
     const table = document.querySelector(".post-table");
@@ -28,34 +38,42 @@ function initApp() {
     function renderPosts() {
         const postsForPage = getPostsForCurrentPage();
 
-        // Xóa tất cả các dòng trong bảng
-        const rows = postsForPage.map((post, index) => `
-            <tr>
-                <td><img src="${post.image || "../assets/images/default.png"}" style="width:100px;height:70px;object-fit:cover;"></td>
-                <td>${post.title}</td>
-                <td>${post.category}</td>
-                <td>${post.content}</td>
-                <td>${post.status === "public" ? "Public" : "Private"}</td>
-                <td>
-                    <select data-index="${index}" class="status-select">
-                        <option value="public" ${post.status === "public" ? "selected" : ""}>Public</option>
-                        <option value="private" ${post.status === "private" ? "selected" : ""}>Private</option>
-                    </select>
-                </td>
-                <td>
-                    <button class="edit-btn btn btn-warning btn-sm" data-index="${index}">Sửa</button>
-                    <button class="delete-btn btn btn-danger btn-sm" data-index="${index}">Xóa</button>
-                </td>
-            </tr>
-        `).join("");
-
-        // Thêm bài viết vào bảng
+        // Xóa tất cả các dòng trong bảng (trừ header)
         const tableRows = table.querySelectorAll("tr");
         tableRows.forEach((row, idx) => { if (idx > 0) row.remove(); });
 
-        table.insertAdjacentHTML('beforeend', rows);
+        // Thêm bài viết vào bảng
+        const rows = postsForPage.map((post, index) => {
+            const absoluteIndex = (currentPage - 1) * postsPerPage + index;
+            const imageSrc = post.image || "../assets/images/default.png";
+            return `
+                <tr>
+                    <td><img src="${imageSrc}" 
+                             onerror="this.src='../assets/images/default.png'"
+                             style="width:100px;height:70px;object-fit:cover;"></td>
+                    <td>${post.title}</td>
+                    <td>${post.category}</td>
+                    <td>${post.content}</td>
+                    <td>
+                        <span class="status-badge ${post.status === 'public' ? 'public' : 'private'}">
+                            ${post.status === 'public' ? 'Public' : 'Private'}
+                        </span>
+                    </td>
+                    <td>
+                        <select data-index="${absoluteIndex}" class="status-select">
+                            <option value="public" ${post.status === "public" ? "selected" : ""}>Public</option>
+                            <option value="private" ${post.status === "private" ? "selected" : ""}>Private</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button class="edit-btn btn btn-warning btn-sm" data-index="${absoluteIndex}">Sửa</button>
+                        <button class="delete-btn btn btn-danger btn-sm" data-index="${absoluteIndex}">Xóa</button>
+                    </td>
+                </tr>
+            `;
+        }).join("");
 
-        // Render phân trang
+        table.insertAdjacentHTML('beforeend', rows);
         renderPagination();
         attachEventListeners();
     }
@@ -64,30 +82,33 @@ function initApp() {
     function renderPagination() {
         const totalPages = Math.ceil(posts.length / postsPerPage);
         pagination.innerHTML = `
-            <a href="#" class="arrow" ${currentPage === 1 ? 'class="disabled"' : ''}>← Previous</a>
+            <a href="#" class="arrow ${currentPage === 1 ? 'disabled' : ''}">← Previous</a>
             <ul class="page-numbers">
                 ${Array.from({ length: totalPages }, (_, i) => `
                     <li><a href="#" class="page ${i + 1 === currentPage ? 'active' : ''}" data-page="${i + 1}">${i + 1}</a></li>
                 `).join('')}
             </ul>
-            <a href="#" class="arrow" ${currentPage === totalPages ? 'class="disabled"' : ''}>Next →</a>
+            <a href="#" class="arrow ${currentPage === totalPages ? 'disabled' : ''}">Next →</a>
         `;
 
         document.querySelectorAll(".page").forEach(page => {
-            page.addEventListener("click", function () {
+            page.addEventListener("click", function (e) {
+                e.preventDefault();
                 currentPage = parseInt(this.dataset.page);
                 renderPosts();
             });
         });
 
-        document.querySelector(".pagination .arrow:first-child")?.addEventListener("click", function () {
+        document.querySelector(".pagination .arrow:first-child")?.addEventListener("click", function (e) {
+            e.preventDefault();
             if (currentPage > 1) {
                 currentPage--;
                 renderPosts();
             }
         });
 
-        document.querySelector(".pagination .arrow:last-child")?.addEventListener("click", function () {
+        document.querySelector(".pagination .arrow:last-child")?.addEventListener("click", function (e) {
+            e.preventDefault();
             if (currentPage < totalPages) {
                 currentPage++;
                 renderPosts();
@@ -98,7 +119,7 @@ function initApp() {
     function attachEventListeners() {
         document.querySelectorAll(".edit-btn").forEach(button => {
             button.addEventListener("click", function () {
-                const index = this.dataset.index;
+                const index = parseInt(this.dataset.index);
                 const post = posts[index];
 
                 editingPostIndex = index;
@@ -121,7 +142,7 @@ function initApp() {
 
         document.querySelectorAll(".delete-btn").forEach(button => {
             button.addEventListener("click", function () {
-                const index = this.dataset.index;
+                const index = parseInt(this.dataset.index);
                 if (confirm("Bạn có chắc chắn muốn xóa bài viết này?")) {
                     posts.splice(index, 1);
                     savePosts();
@@ -132,7 +153,7 @@ function initApp() {
 
         document.querySelectorAll(".status-select").forEach(select => {
             select.addEventListener("change", function () {
-                const index = this.dataset.index;
+                const index = parseInt(this.dataset.index);
                 posts[index].status = this.value;
                 savePosts();
                 renderPosts();
@@ -145,7 +166,7 @@ function initApp() {
         localStorage.setItem("posts", JSON.stringify(posts));
     }
 
-    addArticleForm.addEventListener("submit", function (e) {
+    addArticleForm.addEventListener("submit", async function (e) {
         e.preventDefault();
 
         const title = this.title.value.trim();
@@ -157,20 +178,27 @@ function initApp() {
         let image = "";
 
         if (imageInput.files.length > 0) {
-            image = URL.createObjectURL(imageInput.files[0]);
+            image = await getBase64(imageInput.files[0]);
         }
 
         if (editingPostIndex !== null) {
-            posts[editingPostIndex] = { title, category, mood, content, status, image: posts[editingPostIndex].image };
+            posts[editingPostIndex] = { 
+                ...posts[editingPostIndex],
+                title, 
+                category, 
+                mood, 
+                content, 
+                status 
+            };
             if (image) {
                 posts[editingPostIndex].image = image;
             }
             editingPostIndex = null;
         } else {
-            posts.unshift({ title, category, mood, content, status, image });
+            posts.push({ title, category, mood, content, status, image });
         }
 
-        savePosts(); // Lưu bài viết vào localStorage
+        savePosts();
         renderPosts();
         this.reset();
         const modal = bootstrap.Modal.getInstance(document.getElementById("addArticleModal"));
