@@ -22,6 +22,36 @@ function initApp() {
     const pagination = document.querySelector(".pagination");
     let currentPage = 1;
     const postsPerPage = 2;
+    // Nếu chưa có bài viết nào thì tạo sẵn 3 bài viết mẫu
+    if (!localStorage.getItem("posts")) {
+        const samplePosts = [
+            {
+                title: "Khám phá công nghệ AI",
+                category: "Công nghệ",
+                mood: "Hào hứng",
+                content: "AI đang thay đổi thế giới với tốc độ chóng mặt...",
+                status: "public",
+                image: "../assets/images/Image (1).png"
+            },
+            {
+                title: "Chuyến đi Đà Lạt đáng nhớ",
+                category: "Du lịch",
+                mood: "Thư giãn",
+                content: "Đà Lạt thật tuyệt vời với không khí mát mẻ và cảnh đẹp thơ mộng...",
+                status: "private",
+                image: "../assets/images/Image (2).png"
+            },
+            {
+                title: "Mẹo học lập trình hiệu quả",
+                category: "Học tập",
+                mood: "Tự tin",
+                content: "Việc học lập trình không quá khó nếu bạn biết cách tiếp cận đúng...",
+                status: "public",
+                image: "../assets/images/Image (3).png"
+            }
+        ];
+        localStorage.setItem("posts", JSON.stringify(samplePosts));
+    }
 
     // Lấy bài viết từ localStorage
     let posts = JSON.parse(localStorage.getItem("posts")) || [];
@@ -182,13 +212,13 @@ function initApp() {
         }
 
         if (editingPostIndex !== null) {
-            posts[editingPostIndex] = { 
+            posts[editingPostIndex] = {
                 ...posts[editingPostIndex],
-                title, 
-                category, 
-                mood, 
-                content, 
-                status 
+                title,
+                category,
+                mood,
+                content,
+                status
             };
             if (image) {
                 posts[editingPostIndex].image = image;

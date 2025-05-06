@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Chi tiết bài viết</title>
   <link rel="stylesheet" href="../css/post_detail.css">
 </head>
+
 <body>
   <div class="article-detail">
     <button onclick="window.history.back()">← Quay lại</button>
@@ -20,8 +22,16 @@
     <hr />
     <a href="#" class="view-comments">View all comments ⬇</a>
     <div id="commentsSection"></div>
+    <h3>Bình luận</h3>
+    <div class="comment-form">
+      <input type="text" id="commentInput" placeholder="Viết bình luận..." />
+      <button onclick="addComment()">Gửi</button>
+    </div>
+    <ul id="commentList"></ul>
+
   </div>
 
   <script src="../js/post_detail.js"></script>
 </body>
+
 </html>

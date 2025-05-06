@@ -29,7 +29,7 @@ function handleLogin(e) {
         return;
     }
 
-    localStorage.setItem("loggedInUser", user.name);
+    sessionStorage.setItem("loggedInUser", user.name);
 
     alert(`Đăng nhập thành công! Chào ${user.name}`);
 

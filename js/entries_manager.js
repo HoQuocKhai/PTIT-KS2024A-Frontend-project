@@ -1,4 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
+    if (!localStorage.getItem("categories")) {
+        const defaultCategories = ["Công nghệ", "Du lịch"];
+        localStorage.setItem("categories", JSON.stringify(defaultCategories));
+    }
+
     const addCategoryForm = document.getElementById("add-category-form");
     const categoryInput = document.getElementById("category-input");
     const categoryTableBody = document.getElementById("category-table-body");

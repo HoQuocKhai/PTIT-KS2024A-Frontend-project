@@ -122,3 +122,25 @@
     margin-top: 10px;
   }
   
+  .comment-form>button{
+    border: none;
+    padding:5px 15px;
+    border-radius: 5px;
+    background-color: #10b981;
+    color: white;
+  }
+
+  li>button{
+    flex-direction: column;
+    justify-content: space-between;
+    border: none;
+    padding:5px 15px;
+    border-radius: 5px;
+    background-color: #ff5959;
+    color: white;
+  }
+
+  input{
+    padding: 10px;
+    border-radius: 10px;
+  }

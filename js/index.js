@@ -9,7 +9,7 @@ const postContainer = document.getElementById("postContainer");
 
 // ====== ĐĂNG NHẬP / ĐĂNG XUẤT ======
 function checkLoginStatus() {
-    const loggedInUser = localStorage.getItem("loggedInUser");
+    const loggedInUser = sessionStorage.getItem("loggedInUser");
 
     if (loggedInUser) {
         signupBtn.style.display = "none";
@@ -24,14 +24,22 @@ function checkLoginStatus() {
         logoutBtn.style.display = "none";
     }
 }
+checkLoginStatus()
 
 function logout() {
-    localStorage.removeItem("loggedInUser");
+    sessionStorage.removeItem("loggedInUser");
     checkLoginStatus();
+    alert("Bạn đã đăng xuất!");
 }
-function handleSubmit(event) {
-    event.preventDefault(); // Ngăn reload trang
 
+function handleSubmit(event) {
+    event.preventDefault(); // Ngăn chặn trang reload
+    
+    const loggedInUser = sessionStorage.getItem("loggedInUser");
+    if (!loggedInUser) {
+        alert("Bạn cần đăng nhập để thêm bài viết!");
+        return;
+    }
     const title = document.getElementById('title').value;
     const category = document.getElementById('category').value;
     const mood = document.getElementById('mood').value;
@@ -50,6 +58,7 @@ function handleSubmit(event) {
         const imageUrl = e.target.result;
 
         const newPost = {
+            id: Date.now(), // ID duy nhất cho bài viết mới
             title,
             category,
             mood,
@@ -59,25 +68,42 @@ function handleSubmit(event) {
             date: new Date().toISOString().split('T')[0],
         };
 
-        // Lưu vào localStorage
+        // Lưu bài viết mới vào localStorage
         const posts = JSON.parse(localStorage.getItem("userPosts") || "[]");
-        posts.unshift(newPost);
+        posts.unshift(newPost); // Thêm bài viết vào đầu danh sách
+        localStorage.setItem("userPosts", JSON.stringify(posts));
+
+        alert("Bài viết đã được thêm!");
+        document.getElementById("addPostForm").reset(); // Reset form
+        document.querySelector('#addArticleModal .btn-close').click(); // Đóng modal
+    };
+
+    if (image) {
+        reader.readAsDataURL(image); // Đọc file ảnh nếu có
+    } else {
+        // Nếu không có ảnh, tiếp tục mà không cần xử lý ảnh
+        const newPost = {
+            id: Date.now(),
+            title,
+            category,
+            mood,
+            content,
+            status,
+            imageUrl: null,
+            date: new Date().toISOString().split('T')[0],
+        };
+
+        // Lưu bài viết không có ảnh vào localStorage
+        const posts = JSON.parse(localStorage.getItem("userPosts") || "[]");
+        posts.unshift(newPost); 
         localStorage.setItem("userPosts", JSON.stringify(posts));
 
         alert("Bài viết đã được thêm!");
         document.getElementById("addPostForm").reset();
-        document.querySelector('#addArticleModal .btn-close').click(); // Đóng modal
-
-        // Hàm gọi lại để hiển thị danh sách bài viết
-        renderPosts(); 
-    };
-
-    if (image) {
-        reader.readAsDataURL(image);
-    } else {
-        reader.onload({ target: { result: '' } }); // Không có ảnh
+        document.querySelector('#addArticleModal .btn-close').click();
     }
 }
+
 
 function renderPosts(postsToRender = null) {
     const postContainer = document.getElementById("postContainer");
@@ -92,29 +118,32 @@ function renderPosts(postsToRender = null) {
 
     posts.forEach((post, index) => {
         html += `
-            <div class="card mb-4" onclick="window.location.href='../html/post_detail.html?id=${index}'" style="cursor: pointer;">
-                <img src="${post.imageUrl || '../assets/images/default.png'}" class="card-img-top" alt="Post image">
+            <div class="card mb-4" onclick="viewPostDetail(${post.id})" style="cursor: pointer;">
+                <img src="${post.imageUrl || '../assets/images/Bài viết 1.png'}" class="card-img-top" alt="Post image">
                 <div class="card-body">
                     <p class="text-muted">📅 ${post.date}</p>
                     <h5 class="card-title">${post.title}</h5>
                     <p class="card-text">${post.content.substring(0, 100)}...</p>
-                    <span class="badge bg-primary">${post.category}</span>
-                    <span class="badge bg-success">${post.status}</span>
                     <span class="badge bg-warning text-dark">${post.mood}</span>
                 </div>
             </div>
         `;
+
     });
 
     postContainer.innerHTML = html;
 }
 
 
-function viewPostDetail(index) {
+
+
+function viewPostDetail(postId) {
     const posts = JSON.parse(localStorage.getItem("userPosts") || "[]");
-    localStorage.setItem("selectedPost", JSON.stringify(posts[index]));
-    window.location.href = "./post_detail.html";
+    const selectedPost = posts.find(p => p.id === postId);
+    localStorage.setItem("selectedPost", JSON.stringify(selectedPost));
+    window.location.href = `../html/post_detail.html?id=${postId}`;
 }
+
 
 function renderCategoryLinks() {
     // Lấy danh sách các chủ đề từ localStorage
@@ -157,7 +186,9 @@ function filterByCategory(category) {
 
 
 window.onload = () => {
-    renderCategoryLinks();  // Gọi hàm hiển thị các chủ đề
+    checkLoginStatus();
+    renderCategoryLinks();
     const allPosts = JSON.parse(localStorage.getItem("userPosts") || "[]");
-    renderPosts(allPosts);  // Hiển thị tất cả bài viết
-};
+    renderPosts(allPosts);
+  };
+  

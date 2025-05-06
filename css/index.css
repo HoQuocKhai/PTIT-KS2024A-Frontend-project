@@ -363,3 +363,15 @@ button>a{
 hr{
     width: 55%;
 }
+.card-img-top {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.card-img-top img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}

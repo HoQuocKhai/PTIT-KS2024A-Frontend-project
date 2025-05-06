@@ -7,9 +7,32 @@ if (!localStorage.getItem("users")) {
         email: "admin@gmail.com",
         password: "admin123",
         status: "Hoạt động",
-        role: "admin"
+        role: "admin",
     };
-    localStorage.setItem("users", JSON.stringify([adminUser]));
+
+    const defaultUser1 = {
+        firstname: "Minh",
+        lastname: "Nguyen",
+        name: "Minh Nguyen",
+        username: "@minhnguyen",
+        email: "minh@gmail.com",
+        password: "123456",
+        status: "Hoạt động",
+        role: "user",
+    };
+
+    const defaultUser2 = {
+        firstname: "Linh",
+        lastname: "Tran",
+        name: "Linh Tran",
+        username: "@linhtran",
+        email: "linh@gmail.com",
+        password: "123456",
+        status: "Hoạt động",
+        role: "user",
+    };
+
+    localStorage.setItem("users", JSON.stringify([adminUser, defaultUser1, defaultUser2]));
 }
 
 document.getElementById("registerForm").addEventListener("submit", function (e) {

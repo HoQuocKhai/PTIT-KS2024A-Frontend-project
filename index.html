@@ -20,16 +20,16 @@
                 <button><i class="fas fa-search"></i></button>
             </div>
             <div class="auth-buttons">
-                <button id="signupBtn" data-bs-toggle="modal" data-bs-target="#signupModal"><a
+                <button type="button" id="signupBtn" data-bs-toggle="modal" data-bs-target="#signupModal"><a
                         href="./html/register.html">Sign up</a></button>
-                <button id="signinBtn" data-bs-toggle="modal" data-bs-target="#signinModal"><a
+                <button type="button" id="signinBtn" data-bs-toggle="modal" data-bs-target="#signinModal"><a
                         href="./html/login.html">Sign in</a></button>
 
                 <div id="userGreeting" style="display: none;">
                     👋 Hello, <span id="usernameDisplay"></span>
                 </div>
 
-                <button id="logoutBtn" class="btn btn-sm btn-outline-danger ms-2" onclick="logout()"
+                <button type="button" id="logoutBtn" class="btn btn-sm btn-outline-danger ms-2" onclick="logout()"
                     style="display: none;">Log out</button>
 
             </div>
@@ -97,7 +97,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
                         </div>
 
-                        <form>
+                        <form id="addPostForm" onsubmit="handleSubmit(event)">
                             <div class="modal-body">
 
                                 <div class="mb-3">
@@ -176,7 +176,6 @@
             <a href="#" class="page">10</a>
             <a href="#" class="next">Next →</a>
         </div>
-
 
         <footer class="footer">
             <div class="footer-columns">
